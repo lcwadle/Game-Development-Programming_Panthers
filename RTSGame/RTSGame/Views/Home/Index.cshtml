@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.title = "Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo</title>
+    <script src="~/Scripts/jquery-1.9.0.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+    <script src="~/SignalR/Hubs" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <style>
+        .list-inline li{
+            padding-left : 2px;
+            padding-right : 2px;
+            padding-bottom : 6px;
+        }
+    </style>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div style="padding : 2px">
+                        <h3 id="name"> User</h3>
+                        <input type="text" id="txtUserName" class="form-control" />
+                        <span class="help-block" id="alert">Please Enter your Name and click <strong>Join</strong> to Begin.</span>
+                        <input type="button" id="join" value="Join" class="btn btn-primary" />
+                        <h3>Matches</h3>
+                        <ul id="wins" class="list-inline">
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-10" id="board">
+
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript">
+    $(function () {
+  //      $('#join').attr('disabled', 'disabled');
+
+        var gameHub = $.connection.gameHub;
+        gameHub.client.hello = function (message) {
+            $('#results').append('<Strong>' + message + '</strong>');
+        };
+
+        $.connection.hub.start().done(function () {
+            $('#joib').removeAttr('disabled');
+        });
+
+        $('#join').click(function () {
+            var userName = $('#txtUserName').val();
+            gameHub.server.join(userName);
+        });
+
+        var userID;
+        gameHub.client.playerJoined = function (user) {
+            userID = user.ID;
+            $('txtUserName').attr('disabled', 'disabled');
+            $('#join').attr('disabled', 'disabled');
+        };
+
+        gameHub.client.buildBoard = function (game) {
+            //compile the template.I dont have unity player now.
+            $('#board').html("<li>This thing actually works.</li>");
+        };
+
+        if (userID == game.whosTurn)
+        {
+            $('#alert').html("Let's Begin the game. You get to go first.");
+        }
+        else
+        {
+            $('#alert').html("Let's Begin the game. Your opponent get to go first.");
+        }
+
+        gameHub.client.waitingList = function () {
+            $('#alert').html("There is no player in the lobby now. Let's wait for someone to join.");
+        };
+    });
+    </script>
+
+</body>
+</html>
