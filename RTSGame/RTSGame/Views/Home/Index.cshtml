@@ -28,6 +28,7 @@
                 <div class="col-lg-2">
                     <div style="padding : 2px">
                         <h3 id="name"> User</h3>
+                        <div id="board"></div>
                         <input type="text" id="txtUserName" class="form-control" />
                         <span class="help-block" id="alert">Please Enter your Name and click <strong>Join</strong> to Begin.</span>
                         <input type="button" id="join" value="Join" class="btn btn-primary" />
@@ -64,27 +65,27 @@
         var userID;
         gameHub.client.playerJoined = function (user) {
             userID = user.ID;
-            $('txtUserName').attr('disabled', 'disabled');
+            $('#txtUserName').attr('disabled', 'disabled');
             $('#join').attr('disabled', 'disabled');
-        };
+         };
 
-        gameHub.client.buildBoard = function (game) {
-            //compile the template.I dont have unity player now.
-            $('#board').html("<li>This thing actually works.</li>");
-        };
+            gameHub.client.buildBoard = function (game) {
+                //compile the template.I dont have unity player now.
+                $('#board').html("<li>This thing actually works.</li>");
+        
+                if (userID == game.whosTurn) {
+                    $('#alert').html("Let's Begin the game. You get to go first.");
+                }
+                else {
+                    $('#alert').html("Let's Begin the game. Your opponent get to go first.");
+                }
+             
+            };
 
-        if (userID == game.whosTurn)
-        {
-            $('#alert').html("Let's Begin the game. You get to go first.");
-        }
-        else
-        {
-            $('#alert').html("Let's Begin the game. Your opponent get to go first.");
-        }
-
-        gameHub.client.waitingList = function () {
-            $('#alert').html("There is no player in the lobby now. Let's wait for someone to join.");
-        };
+            gameHub.client.waitingList = function () {
+                $('#alert').html("There is no player in the lobby now. Let's wait for someone to join.");
+            };
+        
     });
     </script>
 
