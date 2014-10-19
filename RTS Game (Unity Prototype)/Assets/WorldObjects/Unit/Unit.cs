@@ -2,6 +2,11 @@
 using System.Collections;
 using RTS;
 
+/// <summary>
+/// Class for any world object in the game.
+/// This includes units and buildings.
+/// </summary>
+
 public class Unit : WorldObject {
 
     protected bool moving, rotating;
@@ -9,15 +14,28 @@ public class Unit : WorldObject {
     private Quaternion targetRotation;
     public float moveSpeed, rotateSpeed;
  
+    /// <summary>
+    /// Initializes variables at creation.
+    /// </summary>
+    
     protected override void Awake()
     {
         base.Awake();
     }
 
+    /// <summary>
+    /// Initializes variables and functions at script
+    /// call.
+    /// </summary>
+
     protected override void Start()
     {
         base.Start();
     }
+
+    /// <summary>
+    /// Game loop functions.
+    /// </summary>
 
     protected override void Update()
     {
@@ -29,10 +47,20 @@ public class Unit : WorldObject {
             MakeMove();
     }
 
+    /// <summary>
+    /// GUI functions.
+    /// </summary>
+
     protected override void OnGUI()
     {
         base.OnGUI();
     }
+
+    /// <summary>
+    /// Changes the cursor icon to the "Move" action if a unit is 
+    /// selected and the cursor at a allowed location.
+    /// </summary>
+    /// <param name="hoverObject"></param>
 
     public override void SetHoverState(GameObject hoverObject)
     {
@@ -43,6 +71,14 @@ public class Unit : WorldObject {
                 player.hud.SetCursorState(CursorState.Move);
     }
 
+    /// <summary>
+    /// Begins the move action if a unit is selected 
+    /// and the location clicked is an allowed move position.
+    /// </summary>
+    /// <param name="hitObject"></param>
+    /// <param name="hitPoint"></param>
+    /// <param name="controller"></param>
+
     public override void MouseClick(GameObject hitObject, Vector3 hitPoint, Player controller)
     {
         base.MouseClick(hitObject, hitPoint, controller);
@@ -51,12 +87,17 @@ public class Unit : WorldObject {
             if (hitObject.name == "Ground" && hitPoint != ResourceManager.InvalidPosition)
             {
                 float x = hitPoint.x;
-                float y = hitPoint.y + player.SelectedObject.transform.position.y;
+                float y = player.SelectedObject.transform.position.y;
                 float z = hitPoint.z;
                 Vector3 destination = new Vector3(x, y, z);
                 StartMove(destination);
             }
     }
+
+    /// <summary>
+    /// Begins the rotation step of the move action.
+    /// </summary>
+    /// <param name="destination"></param>
 
     public void StartMove(Vector3 destination)
     {
@@ -65,6 +106,11 @@ public class Unit : WorldObject {
         rotating = true;
         moving = false;
     }
+
+    /// <summary>
+    /// Performs the rotation of the unit towards the
+    /// destination.
+    /// </summary>
 
     private void TurnToTarget()
     {
@@ -78,6 +124,11 @@ public class Unit : WorldObject {
         }
         CalculateBounds();
     }
+
+    /// <summary>
+    /// Performs the transform of the unit towards
+    /// the destination.
+    /// </summary>
 
     private void MakeMove()
     {
