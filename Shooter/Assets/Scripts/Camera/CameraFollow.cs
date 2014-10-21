@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//look at me
+
 public class CameraFollow : MonoBehaviour
 {
 	public Transform target;            // The position that that camera will be following.
