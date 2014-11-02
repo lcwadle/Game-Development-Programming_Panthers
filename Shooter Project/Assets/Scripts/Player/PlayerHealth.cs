@@ -9,10 +9,12 @@ public class PlayerHealth : MonoBehaviour {
 	PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
 	bool isDead;                                                // Whether the player is dead.
 	bool damaged;                                               // True when the player gets damaged.
+	Animator anim;
 	
 	
 	void Awake ()
 	{
+		anim = GetComponent <Animator> ();
 		playerMovement = GetComponent <PlayerMovement> ();
 		playerShooting = GetComponentInChildren <PlayerShooting> ();
 		currentHealth = startingHealth; // Set the initial health of the player.
@@ -47,5 +49,9 @@ public class PlayerHealth : MonoBehaviour {
 		// Turn off the movement and shooting scripts.
 		playerMovement.enabled = false;
 		playerShooting.enabled = false;
+		
+		GameObject.Destroy(transform.GetChild(0).gameObject);
+		
+		anim.SetTrigger ("Die");
 	} 
 }

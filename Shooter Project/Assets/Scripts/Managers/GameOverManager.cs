@@ -19,13 +19,13 @@ public class GameOverManager : MonoBehaviour {
 		// If the player has run out of health...
 		if(playerHealth.currentHealth <= 0)
 		{
-			//restartTimer += Time.deltaTime; // .. increment a timer to count up to restarting.
+			restartTimer += Time.deltaTime; // .. increment a timer to count up to restarting.
 			
 			// .. if it reaches the restart delay...
-			//if(restartTimer >= restartDelay)
-			//{
+			if(restartTimer >= restartDelay)
+			{
 				Application.LoadLevel(Application.loadedLevel); // .. then reload the currently loaded level.
-			//}
+			}
 		}
 	}
 }
