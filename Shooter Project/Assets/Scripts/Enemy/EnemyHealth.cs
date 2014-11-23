@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour {
 	public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
 	//public AudioClip deathClip;                 // The sound to play when the enemy dies.
 	
+	public int killCount;
 	
 	Animator anim;                              // Reference to the animator.
 	//AudioSource enemyAudio;                     // Reference to the audio source.
@@ -65,6 +66,7 @@ public class EnemyHealth : MonoBehaviour {
 		{
 			// ... the enemy is dead.
 			Death ();
+			killCount++;
 		}
 	}
 	
