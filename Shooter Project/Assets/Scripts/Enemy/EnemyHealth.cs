@@ -9,20 +9,20 @@ public class EnemyHealth : MonoBehaviour {
 	public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
 	//public AudioClip deathClip;                 // The sound to play when the enemy dies.
 	
-	public int killCount;
-	
 	Animator anim;                              // Reference to the animator.
 	//AudioSource enemyAudio;                     // Reference to the audio source.
 	ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
 	SphereCollider sphereCollider;            // Reference to the capsule collider.
 	bool isDead;                                // Whether the enemy is dead.
 	bool isSinking;                             // Whether the enemy has started sinking through the floor.
+	GUIText score;
 	
 	
 	void Awake ()
 	{
 		// Setting up the references.
 		anim = GetComponent <Animator> ();
+		score = GameObject.Find("Score").guiText;
 		//enemyAudio = GetComponent <AudioSource> ();
 		hitParticles = GetComponentInChildren <ParticleSystem> ();
 		sphereCollider = GetComponent <SphereCollider> ();
@@ -66,7 +66,6 @@ public class EnemyHealth : MonoBehaviour {
 		{
 			// ... the enemy is dead.
 			Death ();
-			killCount++;
 		}
 	}
 	
@@ -85,6 +84,8 @@ public class EnemyHealth : MonoBehaviour {
 		// Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
 		//enemyAudio.clip = deathClip;
 		//enemyAudio.Play ();
+		int newScore = int.Parse(score.text) + 100;
+		score.text = "" + newScore;
 	}
 	
 	

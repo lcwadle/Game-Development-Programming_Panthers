@@ -10,11 +10,13 @@ public class PlayerHealth : MonoBehaviour {
 	bool isDead;                                                // Whether the player is dead.
 	bool damaged;                                               // True when the player gets damaged.
 	Animator anim;
+	GUIText healthText;
 	
 	
 	void Awake ()
 	{
 		anim = GetComponent <Animator> ();
+		healthText = GameObject.Find("CurrentHealth").guiText;
 		playerMovement = GetComponent <PlayerMovement> ();
 		playerShooting = GetComponentInChildren <PlayerShooting> ();
 		currentHealth = startingHealth; // Set the initial health of the player.
@@ -31,6 +33,9 @@ public class PlayerHealth : MonoBehaviour {
 	{
 		damaged = true; // Set the damaged flag.
 		currentHealth -= amount; // Reduce the current health by the damage amount.
+		
+		int newHealth = int.Parse(healthText.text) - 10;
+		healthText.text = "" + newHealth;
 		
 		// If the player has lost all it's health and the death flag hasn't been set yet...
 		if(currentHealth <= 0 && !isDead)
