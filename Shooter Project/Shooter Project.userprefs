@@ -1,13 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerHealth.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Managers\GameOverManager.cs">
     <Files>
+      <File FileName="Assets\Scripts\GUI\GameMenu.cs" Line="21" Column="31" />
       <File FileName="Assets\Scripts\Player\PlayerShooting.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Managers\EnemyManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Enemy\EnemyMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player\PlayerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Enemy\EnemyHealth.cs" Line="90" Column="3" />
-      <File FileName="Assets\Scripts\Player\PlayerHealth.cs" Line="29" Column="3" />
+      <File FileName="Assets\Scripts\Enemy\EnemyHealth.cs" Line="68" Column="13" />
+      <File FileName="Assets\Scripts\Player\PlayerHealth.cs" Line="19" Column="57" />
+      <File FileName="Assets\Scripts\Managers\GameOverManager.cs" Line="18" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -4,17 +4,22 @@ using System.Collections;
 public class GameOverManager : MonoBehaviour {
 
 	public PlayerHealth playerHealth;       // Reference to the player's health.
-	public float restartDelay = 5f;         // Time to wait before restarting the level
-	public float gameOverDelay = 1f;
-	float restartTimer;                     // Timer to count up to restarting the level
-	GUITexture gameOver;
+	public float restartDelay = 5f;         // Time to wait before restarting the level.
+	public float gameOverDelay = 1f;		// Time to wait before displaying GAME OVER.
+	float restartTimer;                     // Timer to count up to restarting the level.
+	GUITexture gameOver;					// Reference to the GAME OVER texture.
+	GUIText playagain, quit;				// References to the PLAY AGAIN and QUIT buttons.
 	
 	
 	void Awake ()
 	{
 		playerHealth = gameObject.GetComponent <PlayerHealth> ();
 		gameOver = GameObject.Find("GameOver").guiTexture;
+		playagain = GameObject.Find("PlayAgain").guiText;
+		quit = GameObject.Find("Quit").guiText;
 		gameOver.enabled = false;
+		playagain.enabled = false;
+		quit.enabled = false;
 	}
 	
 	
@@ -28,11 +33,9 @@ public class GameOverManager : MonoBehaviour {
 			// .. if it reaches the restart delay...
 			if(restartTimer >= gameOverDelay)
 			{
-				gameOver.enabled = true;
-			}
-			if(restartTimer >= restartDelay)
-			{
-				Application.LoadLevel(Application.loadedLevel); // .. then reload the currently loaded level.
+				gameOver.enabled = true;		// Enable GAME OVER texture.
+				playagain.enabled = true;		// Enable PLAY AGAIN button.
+				quit.enabled = true;			// Enable QUIT button.
 			}
 		}
 	}
