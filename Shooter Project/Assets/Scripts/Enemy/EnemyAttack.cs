@@ -22,7 +22,6 @@ public class EnemyAttack : MonoBehaviour {
 		enemyHealth = GetComponent<EnemyHealth>();
 	}
 	
-	
 	void OnTriggerEnter (Collider other)
 	{
 		// If the entering collider is the player...

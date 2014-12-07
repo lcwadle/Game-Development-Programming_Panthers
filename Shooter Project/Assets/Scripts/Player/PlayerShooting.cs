@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour {
 		// Set up the references.
 		gunParticles = GetComponent<ParticleSystem> ();
 		gunLine = GetComponent <LineRenderer> ();
-		//gunAudio = GetComponent<AudioSource> ();
+		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 	}
 	
@@ -62,7 +62,7 @@ public class PlayerShooting : MonoBehaviour {
 		timer = 0f;
 		
 		// Play the gun shot audioclip.
-		//gunAudio.Play ();
+		gunAudio.Play ();
 		
 		// Enable the light.
 		gunLight.enabled = true;

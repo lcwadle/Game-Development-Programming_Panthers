@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour {
 	//public AudioClip deathClip;                 // The sound to play when the enemy dies.
 	
 	Animator anim;                              // Reference to the animator.
-	//AudioSource enemyAudio;                     // Reference to the audio source.
+	AudioSource enemyAudio;                     // Reference to the audio source.
 	ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
 	SphereCollider sphereCollider;            // Reference to the capsule collider.
 	bool isDead;                                // Whether the enemy is dead.
@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour {
 		// Setting up the references.
 		anim = GetComponent <Animator> ();
 		score = GameObject.Find("Score").guiText;
-		//enemyAudio = GetComponent <AudioSource> ();
+		enemyAudio = GetComponent <AudioSource> ();
 		hitParticles = GetComponentInChildren <ParticleSystem> ();
 		sphereCollider = GetComponent <SphereCollider> ();
 		
@@ -48,9 +48,6 @@ public class EnemyHealth : MonoBehaviour {
 		if(isDead)
 			// ... no need to take damage so exit the function.
 			return;
-		
-		// Play the hurt sound effect.
-		//enemyAudio.Play ();
 		
 		// Reduce the current health by the amount of damage sustained.
 		currentHealth -= amount;
@@ -80,11 +77,22 @@ public class EnemyHealth : MonoBehaviour {
 		
 		// Tell the animator that the enemy is dead.
 		anim.SetTrigger ("Dead");
+		enemyAudio.Play ();
 		
-		// Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
-		//enemyAudio.clip = deathClip;
-		//enemyAudio.Play ();
-		int newScore = int.Parse(score.text) + 100;
+		// Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing)
+		int scoreValue = 0;
+		if(transform.gameObject.name == "GreenSpider(Clone)")
+			scoreValue = 100;
+		if(transform.gameObject.name == "RedSpider(Clone)")
+			scoreValue = 150;
+		if(transform.gameObject.name == "PurpleSpider(Clone)")
+			scoreValue = 250;
+		if(transform.gameObject.name == "BlueSpider(Clone)")
+			scoreValue = 200;
+		if(transform.gameObject.name == "RainbowSpider(Clone)")
+			scoreValue = 500;
+			
+		int newScore = int.Parse(score.text) + scoreValue;
 		score.text = "" + newScore;
 	}
 	
@@ -99,9 +107,6 @@ public class EnemyHealth : MonoBehaviour {
 		
 		// The enemy should no sink.
 		isSinking = true;
-		
-		// Increase the score by the enemy's score value.
-		//ScoreManager.score += scoreValue;
 		
 		// After 2 seconds destory the enemy.
 		Destroy (gameObject, 2f);
