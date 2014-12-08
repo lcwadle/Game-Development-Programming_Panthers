@@ -20,6 +20,7 @@ public class HealthPickup : MonoBehaviour {
         if (other.gameObject == player)
         {
             gameObject.renderer.enabled = false;
+            gameObject.collider.enabled = false;
             playerHealth.AddHealth(healthpackValue);
         }
     }

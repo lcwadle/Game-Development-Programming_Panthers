@@ -20,5 +20,6 @@ public class HealthpackManager : MonoBehaviour {
             return; // ... exit the function.
         }
         gameObject.renderer.enabled = true;
+        gameObject.collider.enabled = true;
     }
 }

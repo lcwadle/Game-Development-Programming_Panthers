@@ -4,6 +4,7 @@ using System.Collections;
 public class PowerupManager : MonoBehaviour {
 
     public PlayerHealth playerHealth;       // Reference to the player's heatlh.
+    public PowerupIcon powerupIcon;
     public float spawnTime = 3f;            // How long between each spawn.
 
     // Use this for initialization
@@ -20,5 +21,6 @@ public class PowerupManager : MonoBehaviour {
             return; // ... exit the function.
         }
         gameObject.renderer.enabled = true;
+        gameObject.collider.enabled = true;
     }
 }
