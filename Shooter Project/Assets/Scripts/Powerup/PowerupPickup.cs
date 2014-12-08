@@ -7,6 +7,7 @@ public class PowerupPickup : MonoBehaviour {
     public Texture texture;
     public PowerupIcon powerup;
     public PlayerShooting playerShooting;
+    public PlayerMovement playerMovement;
     public PlayerHealth playerHealth;
     public int powerupOption;
 
@@ -35,6 +36,10 @@ public class PowerupPickup : MonoBehaviour {
             if (powerupOption == 3)
             {
                 playerHealth.powerupThree();
+            }
+            if (powerupOption == 4)
+            {
+                playerMovement.powerupFour();
             }
         }
     }

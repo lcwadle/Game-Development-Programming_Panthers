@@ -4,12 +4,15 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;            // The speed that the player will move at.
+    public PowerupIcon powerupIcon;
 	
 	Vector3 movement;                   // The vector to store the direction of the player's movement.
 	Animator anim;                      // Reference to the animator component.
 	Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
 	int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
 	float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+
+    float powerupTimer;
 	
 	void Awake ()
 	{
@@ -41,6 +44,13 @@ public class PlayerMovement : MonoBehaviour
 		
 		// Animate the player.
 		Animating (a, d, w, s);
+
+        powerupTimer += Time.deltaTime;
+
+        if(powerupTimer >= powerupIcon.powerupTime)
+        {
+            speed = 6f;
+        }
 	}
 	
 	void Move (float h, float v)
@@ -121,4 +131,10 @@ public class PlayerMovement : MonoBehaviour
 		anim.SetBool ("IsRunning", running);
 		anim.SetBool ("IsBacking", backing);
 	}
+
+    public void powerupFour()
+    {
+        powerupTimer = 0f;
+        speed = 12f;
+    }
 }
