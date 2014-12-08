@@ -28,5 +28,6 @@ public class PowerupIcon : MonoBehaviour {
         timer = 0f;
         gameObject.guiTexture.texture = texture;
         poweredUp = true;
+
     }
 }

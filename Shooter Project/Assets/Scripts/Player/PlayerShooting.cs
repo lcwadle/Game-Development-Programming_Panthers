@@ -6,6 +6,7 @@ public class PlayerShooting : MonoBehaviour {
 	public int damagePerShot = 20;                  // The damage inflicted by each bullet.
 	public float timeBetweenBullets = 0.15f;        // The time between each shot.
 	public float range = 100f;                      // The distance the gun can fire.
+    public PowerupIcon powerupIcon;
 	
 	float timer;                                    // A timer to determine when to fire.
 	Ray shootRay;                                   // A ray from the gun end forwards.
@@ -16,6 +17,7 @@ public class PlayerShooting : MonoBehaviour {
 	AudioSource gunAudio;                           // Reference to the audio source.
 	Light gunLight;                                 // Reference to the light component.
 	float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
+    float powerupTimer;
 	
 	void Awake ()
 	{
@@ -33,6 +35,13 @@ public class PlayerShooting : MonoBehaviour {
 	{
 		// Add the time since Update was last called to the timer.
 		timer += Time.deltaTime;
+        powerupTimer += Time.deltaTime;
+
+        if(powerupTimer >= powerupIcon.powerupTime)
+        {
+            damagePerShot = 20;
+            timeBetweenBullets = 0.15f;
+        }
 		
 		// If the Fire1 button is being press and it's time to fire...
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets)
@@ -48,6 +57,18 @@ public class PlayerShooting : MonoBehaviour {
 			DisableEffects ();
 		}
 	}
+
+    public void powerupOne()
+    {
+        powerupTimer = 0f;
+        damagePerShot *= 2;
+    }
+
+    public void powerupTwo()
+    {
+        powerupTimer = 0f;
+        timeBetweenBullets = 0.07f;
+    }
 	
 	public void DisableEffects ()
 	{

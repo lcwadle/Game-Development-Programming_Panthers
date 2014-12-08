@@ -6,6 +6,8 @@ public class PowerupPickup : MonoBehaviour {
     GameObject player;    // Reference to the player GameObject.
     public Texture texture;
     public PowerupIcon powerup;
+    public PlayerShooting playerShooting;
+    public int powerupOption;
 
     // Use this for initialization
     void Awake()
@@ -21,7 +23,14 @@ public class PowerupPickup : MonoBehaviour {
             gameObject.renderer.enabled = false;
             gameObject.collider.enabled = false;
             powerup.pickedUp(texture);
-            // powerup
+            if (powerupOption == 1)
+            {
+                playerShooting.powerupOne();
+            }
+            if (powerupOption == 2)
+            {
+                playerShooting.powerupTwo();
+            }
         }
     }
 }
