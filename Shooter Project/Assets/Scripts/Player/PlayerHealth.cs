@@ -44,7 +44,16 @@ public class PlayerHealth : MonoBehaviour {
 			Death ();
 		}
 	}
-	
+
+    public void AddHealth(int amount)
+    {
+        if (currentHealth < 100)
+        {
+            currentHealth += amount;  // Add health amount to player
+            int newHealth = int.Parse(healthText.text) + 10;
+            healthText.text = "" + newHealth;
+        }
+    }
 	
 	void Death ()
 	{
