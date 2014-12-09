@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public float speed = 6f;            // The speed that the player will move at.
+	public float speed;            // The speed that the player will move at.
     public PowerupIcon powerupIcon;
 	
 	Vector3 movement;                   // The vector to store the direction of the player's movement.
@@ -44,19 +44,18 @@ public class PlayerMovement : MonoBehaviour
 		
 		// Animate the player.
 		Animating (a, d, w, s);
-
-        powerupTimer += Time.deltaTime;
-
-        if(powerupTimer >= powerupIcon.powerupTime)
-        {
-            speed = 6f;
-        }
 	}
 	
 	void Move (float h, float v)
 	{
 		// Set the movement vector based on the axis input.
 		movement.Set (h, 0f, v);
+
+        powerupTimer += Time.deltaTime;
+        if (powerupTimer >= powerupIcon.powerupTime)
+        {
+            speed = 10f;
+        }
 		
 		// Normalise the movement vector and make it proportional to the speed per second.
 		movement = movement.normalized * speed * Time.deltaTime;
